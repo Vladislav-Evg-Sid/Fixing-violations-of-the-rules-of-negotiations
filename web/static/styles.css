@@ -52,12 +52,24 @@ body, html{
     background-color: #E21D1D;
 }
 
-.bg-green {
+.bg-yellow {
+    background-color: #E5DE00;
+}
+
+.acc-green {
     background-color: #4BB543;
 }
 
-.bg-yellow {
+.acc-green:not(.collapsed) {
+    background-color: #3ea337;
+}
+
+.acc-yellow {
     background-color: #E5DE00;
+}
+
+.acc-yellow:not(.collapsed) {
+    background-color: #ccc502;
 }
 
 .btn-red {
