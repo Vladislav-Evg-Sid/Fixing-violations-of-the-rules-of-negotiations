@@ -1,6 +1,19 @@
 from flask import render_template
 from config import app
 
+def words_in_brackets(input):
+    arr = []
+    while True:
+        if input.find("<") == -1:
+            break
+        start = input.find("<")
+        end = input.find(">")
+        arr.append(input[:start])
+        arr.append(input[start + 1:end])
+        input = input[end+1:]
+    arr.append(input)
+    return arr
+
 @app.route("/")
 def index() -> str:
     """Функция позволяет отрендерить главную страницу веб-сервиса.
@@ -17,5 +30,6 @@ def index() -> str:
     return render_template(
         "index.html",
         dialogues=dialogues,
+        words_in_brackets=words_in_brackets,
         page_title="Сводка",
     )

@@ -53,23 +53,27 @@ body, html{
 }
 
 .bg-yellow {
-    background-color: #E5DE00;
+    background-color: #e6e16dF2;
 }
 
 .acc-green {
-    background-color: #4BB543;
+    background-color: #65bd5ff2;
 }
 
 .acc-green:not(.collapsed) {
-    background-color: #3ea337;
+    background-color: #3ea337CC;
 }
 
 .acc-yellow {
-    background-color: #E5DE00;
+    background-color: #e6e16dF2;
 }
 
 .acc-yellow:not(.collapsed) {
-    background-color: #ccc502;
+    background-color: #c5c02dcc;
+}
+
+.accordion_custom {
+    --bs-accordion-border-radius: 0.75rem;
 }
 
 .btn-red {
