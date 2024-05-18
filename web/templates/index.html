@@ -13,7 +13,7 @@
         <div class="loader"></div>
         <div class="container-fluid">
             <div class="row vh-100">
-                <div class="col-10 offset-1 h-100 bg-main-2">
+                <div class="col-10 offset-1 bg-main-2">
                     <div class="row text-center bg-white">
                         <div class="col-1 bg-red">
                             <img src="{{ url_for('static', filename='logo.svg') }}" class="img-fluid w-50 my-3" alt="logo">
@@ -42,12 +42,19 @@
                     </div>
                     
                     <div class="col-10 offset-1">
-                        <div class="accordion mt-4" id="speeches">
+                        <div class="accordion mt-4 mb-5" id="speeches">
                             {% for dialogue in dialogues %}
                                 <div class="accordion-item mb-1">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed {{ 'acc-yellow' if dialogue[2] else 'acc-green' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{dialogues.index(dialogue) + 1}}" aria-expanded="false" aria-controls="collapse{{dialogues.index(dialogue) + 1}}">
-                                            <audio controls src="../static/{{ dialogue[0] }}" class="w-100 me-3"></audio>
+                                        <button class="accordion-button collapsed acc-rzd" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{dialogues.index(dialogue) + 1}}" aria-expanded="false" aria-controls="collapse{{dialogues.index(dialogue) + 1}}">
+                                            <div class="row w-100 align-items-center">
+                                                <div class="col-11">
+                                                    <audio controls src="../static/{{ dialogue[0] }}" class="w-100"></audio>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <h4 class="text-center">{{ '⚠️' if dialogue[2] else '✅' }}{{ dialogue[1].count('<') }}</h4>
+                                                </div>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="collapse{{dialogues.index(dialogue) + 1}}" class="accordion-collapse collapse">

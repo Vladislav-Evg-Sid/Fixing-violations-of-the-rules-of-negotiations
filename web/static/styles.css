@@ -56,24 +56,14 @@ body, html{
     background-color: #e6e16dF2;
 }
 
-.acc-green {
-    background-color: #65bd5ff2;
+.acc-rzd {
+    background-color: #8e9298;
+    color: white;
 }
 
-.acc-green:not(.collapsed) {
-    background-color: #3ea337CC;
-}
-
-.acc-yellow {
-    background-color: #e6e16dF2;
-}
-
-.acc-yellow:not(.collapsed) {
-    background-color: #c5c02dcc;
-}
-
-.accordion_custom {
-    --bs-accordion-border-radius: 0.75rem;
+.acc-rzd:not(.collapsed) {
+    background-color: #7f8186;
+    color: white;
 }
 
 .btn-red {
