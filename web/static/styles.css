@@ -1,0 +1,82 @@
+body, html{
+    max-width: 100%;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333333;
+    z-index: 1;
+    transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: #009578;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.bg-main-1 {
+    background-color: #333333;
+}
+
+.bg-main-2 {
+    background-color: #E9EAED;
+}
+
+.bg-red {
+    background-color: #E21D1D;
+}
+
+.bg-yellow {
+    background-color: #e6e16dF2;
+}
+
+.acc-rzd {
+    background-color: #8e9298;
+    color: white;
+}
+
+.acc-rzd:not(.collapsed) {
+    background-color: #7f8186;
+    color: white;
+}
+
+.btn-red {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #E31B1A;
+    --bs-btn-border-color: #E31B1A;
+    --bs-btn-border-radius: .5rem;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #CA1110;
+    --bs-btn-hover-border-color: #CA1110;
+    --bs-btn-focus-shadow-rgb: #E31B1A;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #9A0B0B;
+    --bs-btn-active-border-color: #9A0B0B;
+}
