@@ -14,76 +14,87 @@
         <div class="container-fluid">
             <div class="row vh-100">
                 <div class="col-10 offset-1 bg-main-2">
-                    <div class="row text-center bg-white">
+                    <div class="row text-center bg-white align-items-center">
                         <div class="col-1 bg-red">
                             <img src="{{ url_for('static', filename='logo.svg') }}" class="img-fluid w-50 my-3" alt="logo">
                         </div>
-                        <div class="col-11">
-                            
+                        <div class="col-10">
+                            <h2>{{ page_title }}</h2>
                         </div>
-                    </div>
+                        <div class="col-1 bg-red">
+                            <img src="{{ url_for('static', filename='logo.svg') }}" class="img-fluid w-50 my-3" alt="logo">
+                        </div>
+                    </div>                   
 
                     <div class="card mt-4">
                         <div class="card-header">
                             Загрузка аудиофайлов
                         </div>
                         <div class="card-body">
-                            <form id="dateRangeForm">
+                            <form id="dateRangeForm" action='/upload'>
                                 <div class="row mb-2">
                                     <div class="col-10">
                                         <input class="form-control" type="file" id="formFileMultiple" multiple>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-red w-100" type="submit">Загрузить</button>
+                                        <button class="btn btn-red w-100" type="submit" name="upload">Загрузить</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     
-                    <div class="col-10 offset-1">
-                        <div class="accordion mt-4 mb-5" id="speeches">
-                            {% for dialogue in dialogues %}
-                                <div class="accordion-item mb-1">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed acc-rzd" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{dialogues.index(dialogue) + 1}}" aria-expanded="false" aria-controls="collapse{{dialogues.index(dialogue) + 1}}">
-                                            <div class="row w-100 align-items-center">
-                                                <div class="col-11">
-                                                    <audio controls src="../static/{{ dialogue[0] }}" class="w-100"></audio>
+                    <div class="col-10 offset-1 text-center">
+                        {% if dialogues %}
+                            <div class="accordion mt-4 mb-4" id="speeches">
+                                {% for dialogue in dialogues %}
+                                    <div class="accordion-item mb-1">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed acc-rzd" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{dialogues.index(dialogue) + 1}}" aria-expanded="false" aria-controls="collapse{{dialogues.index(dialogue) + 1}}">
+                                                <div class="row w-100 align-items-center">
+                                                    <div class="col-11">
+                                                        <audio controls src="../static/{{ dialogue[0] }}" class="w-100"></audio>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <h4 class="text-center">{{ '⚠️' if dialogue[2] else '✅' }}{{ dialogue[1].count('<') }}</h4>
+                                                    </div>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <h4 class="text-center">{{ '⚠️' if dialogue[2] else '✅' }}{{ dialogue[1].count('<') }}</h4>
-                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{dialogues.index(dialogue) + 1}}" class="accordion-collapse collapse">
+                                            <div class="accordion-body">
+                                                <strong>Диалог:</strong><br>
+                                                {% if dialogue[2] %}
+                                                    {% for line in dialogue[1].split("\n") %}
+                                                        {% set count = namespace(value=0) %}
+                                                        {% for word in words_in_brackets(line) %}
+                                                            <span class="{{ 'bg-yellow' if count.value % 2 == 1}}">{{ word }}</span>
+                                                            {% set count.value = count.value + 1 %}
+                                                        {% endfor %}<br>
+                                                    {% endfor %}
+                                                    <strong>Ошибки:</strong><br>
+                                                    {% for mistake in dialogue[3] %}
+                                                        {{ mistake }}<br>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for line in dialogue[1].split("\n") %}
+                                                        {{ line }}<br>
+                                                    {% endfor %}
+                                                {% endif %}
                                             </div>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{dialogues.index(dialogue) + 1}}" class="accordion-collapse collapse">
-                                        <div class="accordion-body">
-                                            <strong>Диалог:</strong><br>
-                                            {% if dialogue[2] %}
-                                                {% for line in dialogue[1].split("\n") %}
-                                                    {% set count = namespace(value=0) %}
-                                                    {% for word in words_in_brackets(line) %}
-                                                        <span class="{{ 'bg-yellow' if count.value % 2 == 1}}">{{ word }}</span>
-                                                        {% set count.value = count.value + 1 %}
-                                                    {% endfor %}<br>
-                                                {% endfor %}
-                                                <strong>Ошибки:</strong><br>
-                                                {% for mistake in dialogue[3] %}
-                                                    {{ mistake }}<br>
-                                                {% endfor %}
-                                            {% else %}
-                                                {% for line in dialogue[1].split("\n") %}
-                                                    {{ line }}<br>
-                                                {% endfor %}
-                                            {% endif %}
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
-                        </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <h2 class="mt-4 mb-4">Записей переговоров нет</h2>
+                        {% endif %}
                     </div>
-                    
+                    <div class="col-2 offset-10">
+                        <form id="dateRangeForm" action='/clear'>
+                            <button class="btn btn-red w-100" type="submit" name="clear">Очистить</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
