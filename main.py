@@ -1,7 +1,7 @@
 from text_analysis import text_analysis
 
 
-def main():
+def main() -> str:
     # Это типо диалог от Димы.
     line = [
         'Машинист поезда №2120 на 5 - м пути станции К.',
@@ -12,7 +12,7 @@ def main():
     ]
     # Анализ
     analysis = text_analysis.text_analysis()
-    print(analysis.analyze(line))
+    return analysis.analyze(line)
 
 
 if __name__ == '__main__':

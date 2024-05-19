@@ -21,8 +21,8 @@
                         <div class="col-10">
                             <h2>{{ page_title }}</h2>
                         </div>
-                        <div class="col-1 bg-red">
-                            <img src="{{ url_for('static', filename='logo.svg') }}" class="img-fluid w-50 my-3" alt="logo">
+                        <div class="col-1">
+
                         </div>
                     </div>                   
 
@@ -31,13 +31,13 @@
                             Загрузка аудиофайлов
                         </div>
                         <div class="card-body">
-                            <form id="dateRangeForm" action='/upload'>
+                            <form id="dateRangeForm" action='/upload' method="post" enctype="multipart/form-data">
                                 <div class="row mb-2">
                                     <div class="col-10">
-                                        <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                        <input class="form-control" type="file" id="formFileMultiple" name="formFileMultiple" multiple>
                                     </div>
                                     <div class="col-2">
-                                        <button class="btn btn-red w-100" type="submit" name="upload">Загрузить</button>
+                                        <button class="btn btn-red w-100" type="submit" id="upload" name="upload">Загрузить</button>
                                     </div>
                                 </div>
                             </form>
